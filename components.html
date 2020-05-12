@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Components</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <h2>Buttons</h2>
+    <div style="display: flex; justify-content: space-evenly; width: 100%;">
+        <div class="button">
+            <img src="assets/img/add.svg" alt="">
+            <p>Add</p>
+        </div>
+        <div class="button">
+        <img src="assets/img/select.svg" alt="">
+        <p>Selection</p>
+        </div>
+        <br>
+        <div class="button">
+            <img class="yellow-icon" alt="" src="assets/img/edit.svg">
+            <p style="color: #EFA700;"> Edit</p>
+        </div>
+        <div class="button">
+            <img class="red-icon" src="assets/img/bin.svg" alt="">
+            <p style="color: #CF0000;"> Delete</p>
+        </div>
+    </div>
+    <br>
+    <h2>Containers</h2>
+    <div style="display: flex;  width: 60%;">
+        <div class="container-innershadow" style="width: 80%; height: 100px;">
+        
+        </div>
+    </div>
+    <br>
+    <h2>Trees</h2>
+    <div style="display: flex; width: 80%;">
+        <ul id="treeUL">
+            <li><span class="treeCaret">Node 1</span>
+                <ul class="nestedTree">
+                    <li>id: 3</li>
+                    <li>Name: London <span class="rename-node-tree italic fake-link">rename</span>
+                        <ul class="nestedTree">
+                            <li>
+                                <input type="text">
+                                <button>rename</button>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li><span class="treeCaret">2 Lines connected</span>
+                        <ul class="nestedTree">
+                            <li>Line 1 <span class="rename-node-tree italic fake-link">delete</span></li>
+                            <li>Line 2 <span class="rename-node-tree italic fake-link">delete</span></li>
+                        </ul>
+                    </li>
+                    <li class="italic fake-link" >delete node</li>
+                </ul>
+            </li>
+            <li><span class="treeCaret">Node 2</span>
+                <ul class="nestedTree">
+                    <li>id: 3</li>
+                    <li>Name: London <span class="rename-node-tree italic fake-link">rename</span>
+                        <ul class="nestedTree">
+                            <li>
+                                <input type="text">
+                                <button>rename</button>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li><span class="treeCaret">2 Lines connected</span>
+                        <ul class="nestedTree">
+                            <li>Line 1 <span class="rename-node-tree italic fake-link">delete</span></li>
+                            <li>Line 2 <span class="rename-node-tree italic fake-link">delete</span></li>
+                        </ul>
+                    </li>
+                    <li class="italic fake-link" >delete node</li>
+                </ul>
+            </li>
+            <li><span class="treeCaret">Node 3</span>
+                <ul class="nestedTree">
+                    <li>id: 3</li>
+                    <li>Name: London <span class="rename-node-tree italic fake-link">rename</span>
+                        <ul class="nestedTree">
+                            <li>
+                                <input type="text">
+                                <button>rename</button>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li><span class="treeCaret">2 Lines connected</span>
+                        <ul class="nestedTree">
+                            <li>Line 1 <span class="rename-node-tree italic fake-link">delete</span></li>
+                            <li>Line 2 <span class="rename-node-tree italic fake-link">delete</span></li>
+                        </ul>
+                    </li>
+                    <li class="italic fake-link" >delete node</li>
+                </ul>
+            </li>
+            
+            
+        </ul>
+        
+    </div>
+    <div style="display: flex; width: 80%;">
+        <h3>adj Mat</h3>
+        <div id="AdjMatrixContainer"></div>
+        
+    </div>
+
+   
+
+
+    <script src="sidebarMenu.js"></script>
+    <script src="matrix.js"></script>
+</body>
+</html>

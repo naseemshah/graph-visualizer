@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Graph Visualizerᵇᵉᵗᵃ v0.1</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style2.css">
+    <script src="assets/js/long-press-event.js"></script>
+    
+</head>
+<body>
+    <div class="menu">
+        <div class="menulogo">
+            <img src="assets/img/logo.svg" alt="logo">
+        </div>
+        <div class="menu-buttons-container">
+            <div onclick="newNode(200,200);" class="button">
+                <img src="assets/img/add.svg" alt="">
+                <p>Add</p>
+            </div>
+            <!-- <p>mouse X : <strong id="mx">?</strong> Y : <strong id="my">?</strong>   |   Touch X : <strong id="tx">?</strong> Y : <strong id="ty">?</strong></p> -->
+            
+            <div onclick="toggleFullScreen()" class="button" >
+                <img src="assets/img/full.svg" alt="">
+                <p>Full Screen</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contextmenu" class="contextmenu contextmenuhide">
+        <div id="ctxMenuContent" class="ctxAllOptions">
+            <!-- <div id="contextmenu-0" class="innercontextmenu">
+                <div class="ctxMenutitle">
+                <p>Node 1 Options</p>
+                </div>
+                <div class="ctxMenuOptions">
+                    <div class="ctxMenuOptionsButtonsContainer">               
+                        <div class="button" onclick="deleteNodebyID(1)">
+                            <img src="assets/img/add.svg" alt="">
+                            <p>Delete</p>
+                        </div>
+                        <div class="button" onclick="document.getElementById('rename-0').classList.toggle('rename-menu-hide');">
+                            <img src="assets/img/bin.svg" alt="">
+                            <p>Edit</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="rename-0" class="rename-menu rename-menu-hide">
+                    <input id="rename-text-1" type="text">
+                    <div>
+                        <button onclick="setText(1)">Rename</button>                    
+                        <span class="fake-link" onclick="document.getElementById('rename-0').classList.toggle('rename-menu-hide')">Close</span>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="ctxMenubottom">
+            <hr>
+            <span class="fake-link italic" style="float: right; padding: 5px;" onclick="contextmenu.classList.toggle('contextmenuhide')">Close</span>
+        </div>
+    </div>
+    
+    <div class="sidebar-wrapper"  style="background-color: aqua;">
+        <div id="sidebar"  class="sidebar">
+            <div id='sidebar-inner-wrapper-1' class="siderbar-inner-wrapper">
+                <div id="up-container" class="mobile-only up-container">
+                    <img src="assets/img/up.svg" alt="">
+                    <p>
+                        Tap to open
+                    </p>
+                </div>
+                <div id="nodes-tree-container" class="nodes-tree-container">
+                    <h5 style="text-align: center; margin: 10px 0 0 0;">Nodes</h5>
+                    <div  class="container-innershadow" style="margin: 10px;  padding: 10px; outline: none;">
+                        <div class="nodes-tree-contents">
+                            <ul id="treeUL">
+                                <li>
+                                    <p>No Nodes to show. Please add some Nodes.</p>
+                                </li>  
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="lines-tree-container" class="lines-tree-container">
+                    <h5 style="text-align: center; margin: 10px 0 0 0;">Lines</h5>
+                    <div class="container-innershadow" style="margin: 10px; padding: 10px;  outline: none;">
+                        <div class="lines-tree-contents">
+                            <ul id="LinestreeUL">
+                                <li>
+                                    <p>No Lines to show. Please connect some Lines to Nodes.</p>
+                                </li>  
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="adj-matrix-wrapper">
+                    <h5 style="text-align: center; margin: 10px 0 0 0;">Adjacency Matrix</h5>
+                    <div class="container-innershadow" style="margin: 10px;  outline: none; overflow: hidden; " >
+                    <div id="AdjMatrixContainer" >
+                        <p>No Matrix to show. Please Add Nodes to calculate matrix. </p>
+                    
+                    </div>        
+                </div>
+                </div>
+
+                <div id="incd-matrix-wrapper">
+                    <h5 style="text-align: center; margin: 10px 0 0 0;">Incedence Matrix</h5>
+                    <div class="container-innershadow" style="margin: 10px;  outline: none; overflow: hidden; " >
+                    <div id="incdMatrixContainer" >
+                        <p>No Matrix to show. Please Add Nodes to calculate matrix. </p>
+                    
+                    </div>        
+                </div>
+                </div>
+            </div>
+            <div class="sidebar-inner-wrapper-2">
+                <div id="nodes-button" class="button">
+                    <!-- <img src="assets/img/add.svg" alt=""> -->
+                    <p>Close Nodes Browser</p>
+                </div>
+                <div id="lines-button" class="button">
+                    <!-- <img src="assets/img/add.svg" alt=""> -->
+                    <p>Close Lines  Browser</p>
+                </div>
+                <div id="adjmat-button" class="button">
+                    <!-- <img src="assets/img/add.svg" alt=""> -->
+                    <p>Hide Adjacency Matrix</p>
+                </div>
+                <div id="incmat-button" class="button">
+                    <!-- <img src="assets/img/add.svg" alt=""> -->
+                    <p>Hide Incidence Matrix</p>
+                </div>
+            </div>
+        </div>
+        <div id="left-container" class="left-container mobile-hide ">
+            <img src="assets/img/up.svg" alt="">
+            <p>
+                Tap to open
+            </p>
+        </div>
+
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="canvas" data-long-press-delay="200"></canvas>
+    </div>
+    
+    <script>
+        function toggleFullScreen() {
+            var doc = window.document;
+            var docEl = doc.documentElement;
+
+            var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+            var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+            if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+                requestFullScreen.call(docEl);
+            }
+            else {
+                cancelFullScreen.call(doc);
+            }
+        }
+
+        
+
+    </script>
+    <script src='https://unpkg.com/panzoom@9.2.4/dist/panzoom.min.js'></script>
+    <script src="assets/js/canvas.js"></script>
+    <script src="assets/js/contextmenu.js"></script>
+    <script src="assets/js/matrix.js"></script>
+    <script src="assets/js/sidebarMenu.js"></script>
+</html>
