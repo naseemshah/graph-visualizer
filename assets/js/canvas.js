@@ -259,6 +259,22 @@ function deleteNodebyID(id){
     updateNodesTree();
     updateLinesTree();
 }
+
+function deleteLineById(id){
+    lines.some((line,idx) => {
+        if(line.id === id){
+            lines.splice(idx,1);
+        }
+    });
+    update();
+    updateAdjMatrixSize();
+    updateAdjMatrixLines();
+    updateIncdMatrixSize();
+    updateIncdMatrixLines();
+    updateNodesTree();
+    updateLinesTree();
+}
+
 function reInitNodeIds(){
     nodes.forEach((node,idx)=>{
         node.id = idx+1;

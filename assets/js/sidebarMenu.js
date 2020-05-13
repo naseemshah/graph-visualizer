@@ -145,7 +145,7 @@ function updateLinesTree(){
                             <li >To Node:<br> <span >${line.toNode.text} </span> <span>(id: ${line.toNode.id})</span></li>
                         </ul>
                     </li>
-                    <li class="italic fake-link">delete line</li>
+                    <li onclick="deleteLineById(${line.id})" class="italic fake-link">delete line</li>
                 </ul>
             </li>   
             `;
