@@ -151,6 +151,12 @@ function updateLinesTree(){
             `;
             
         });
+    }else{
+            let LinestreeUL= document.getElementById("LinestreeUL");
+            LinestreeUL.innerHTML = `
+            <li>
+            <p>No Lines to show. Please connect some Lines to Nodes.</p>
+            </li> `;
         }
         
     
@@ -226,6 +232,12 @@ function updateNodesTree(){
         `;
         
     });
+    }else{
+        let treeUL= document.getElementById("treeUL");
+        treeUL.innerHTML = `
+        <li>
+            <p>No Nodes to show. Please add some Nodes.</p>
+        </li> `;
     }
     
 
