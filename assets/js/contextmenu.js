@@ -102,64 +102,6 @@ document.addEventListener('touchend',()=>{
 
 let contextMenuOptions = [];
 
-// function loadCtxMenu(){
-//     ctxMenuContent.innerHTML = "";
-//     html=`<div class="ctxAllOptions">`
-//     contextMenuOptions.forEach((object,idx1) => {
-//         title = object.title;
-//         options = object.options;
-//         html =`
-//         <div id="contextmenu-${idx1}" class="innercontextmenu">
-//         <div class="ctxMenutitle">
-//         <p>${title}</p>
-        
-//         </div>
-//         <div class="ctxMenuOptions">
-//         <div class="ctxMenuOptionsButtonsContainer">
-//         `       
-//         options.forEach((option,idx2)=>{
-//             if(option.title=='Edit'){
-//                 html += `
-                
-//                 <div class="button" onclick="document.getElementById('rename-${idx1}').classList.toggle('rename-menu-hide');">
-//                 <img src="assets/img/bin.svg" alt="">
-//                 <p>Edit</p>
-//                 <!-- <button onclick="document.getElementById('rename-${idx1}').classList.toggle('rename-menu-hide');">${option.title}</button> -->
-//                 </div>
-                
-//                 `;
-                
-                
-                
-//             }else{
-//                 html += `
-//                 </iv>
-//                 <div class="button" onclick="${option.action}"">
-//                 <img src="assets/img/add.svg" alt="">
-//                 <p>${option.title}</p>
-//                 </div>
-//                 <!-- <button onclick="${option.action}">${option.title}</botton> -->
-//                 `;
-//             }
-
-//             html += `<div id='rename-${idx1}' class="rename-menu-hide rename-menu" >
-//             <input id="rename-text-${object.nodeId}" type="text">
-//             <div>
-//             <button onclick="setText(${object.nodeId})">Rename</button>                    
-//             <span class="fake-link" onclick="document.getElementById('rename-${idx1}').classList.toggle('rename-menu-hide')">Close</span>
-//             </div>
-//         </div>  `;
-//         });
-//         if(!contextmenu.innerHTML.includes(html)){ctxMenuContent.innerHTML += html;}
-        
-//     });
-    
-    
-//     html=`</div> </div> </div>`;
-//     if(!contextmenu.innerHTML.includes(html)){ctxMenuContent.innerHTML += html;}
-
-// }
-
 function loadCtxMenu(){
     ctxMenuContent.innerHTML = "";
     let html = '';
@@ -189,7 +131,7 @@ function loadCtxMenu(){
 
                     }else{
                             
-                            html+=`<div class="button" onclick="${option.action}">
+                            html+=`<div class="button" onclick="${option.action};onEmptyCloseContextMenu();">
                                 <img src="assets/img/bin.svg" alt="">
                                 <p style="color: #CF0000;">Delete</p>
                             </div>
@@ -210,7 +152,6 @@ function loadCtxMenu(){
             html+=`</div>
         </div>
         `;
-        // if(!contextmenu.innerHTML.includes(html)){ctxMenuContent.innerHTML += html;}
 
     });
     html +=`</div>`
@@ -223,4 +164,15 @@ function setText(id){
         renameText += 'Node '+ id; 
     }
     editNameById(id,renameText)
+}
+
+function onEmptyCloseContextMenu(){
+    let htmlOptions = Array.from(document.getElementsByClassName("innercontextmenu"));  
+    let emptyFlag=true;
+    for (let i = 0; i < htmlOptions.length; i++) {
+        if(!htmlOptions[i].classList.contains("contextmenudeleted")){
+            emptyFlag = false;
+        }
+    }    
+    if(emptyFlag){contextmenu.classList.toggle('contextmenuhide');}
 }
