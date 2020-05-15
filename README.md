@@ -1,4 +1,4 @@
-# graph-visualizer (v0.1.4)
+# graph-visualizer (v0.1.5)
 <p align="center">
   <img width="250" src="assets/img/logo.svg" alt="Graph Visualizer"/>
 </p>
