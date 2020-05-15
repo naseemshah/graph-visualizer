@@ -92,7 +92,6 @@ class Line{
         this.weight = newWeight;
     }
     draw(){
-        
         c.beginPath();
         if(this.fromNode && this.fromNode.x && this.fromNode.y){
             c.moveTo(this.fromNode.x, this.fromNode.y);
@@ -126,7 +125,6 @@ class Line{
         c.globalCompositeOperation = 'destination-over';
         c.stroke();
         c.globalCompositeOperation = 'source-over';
-        
         //weight circle
         if(this.center && this.center.x && this.center.y){
             c.beginPath();
@@ -326,7 +324,6 @@ var isConnectorActive = false;
 function update(){
     requestAnimationFrame(()=>{});    
     c.clearRect(0, 0, canvas.width, canvas.height);
-    
     //render Lines
     lines.forEach((line,idx) => {
         //conditional for checking if line is connceted
@@ -338,65 +335,52 @@ function update(){
         }
         line.draw();
     });
-
-
     nodes.forEach((node,idx) => {
-        
-
-
-    //condition for checking if it's inside a connector
-    if( 
-        (
-        (mousePos.x <= (node.x + node.radius + node.connectorRadius))
-        && (mousePos.x >= (node.x + node.radius - node.connectorRadius))
-        && (mousePos.y <= (node.y + node.connectorRadius))
-        &&(mousePos.y >= (node.y  - node.connectorRadius))
-        )
-        ||
-        (
-            (touchPos.x <= (node.x + node.radius + node.connectorRadius+15))
-            && (touchPos.x >= (node.x + node.radius - node.connectorRadius-15))
-            && (touchPos.y <= (node.y + node.connectorRadius+15))
-            &&(touchPos.y >= (node.y  - node.connectorRadius-15))
-        )
-        
-    ){
-        
-        node.connectorRadius = 10;
-        node.connectorColor = 'yellow';
-        
-        Panzoom.pause();
-        if(isclick && !newLineMode && !isNodeMoveMode && !touchPos.x){
-            isConnectorActive = true;
-            Panzoom.pause();
-            connectLine(node);
+        //condition for checking if it's inside a connector
+        if( 
+            (
+            (mousePos.x <= (node.x + node.radius + node.connectorRadius))
+            && (mousePos.x >= (node.x + node.radius - node.connectorRadius))
+            && (mousePos.y <= (node.y + node.connectorRadius))
+            &&(mousePos.y >= (node.y  - node.connectorRadius))
+            )
+            ||
+            (
+                (touchPos.x <= (node.x + node.radius + node.connectorRadius+15))
+                && (touchPos.x >= (node.x + node.radius - node.connectorRadius-15))
+                && (touchPos.y <= (node.y + node.connectorRadius+15))
+                &&(touchPos.y >= (node.y  - node.connectorRadius-15))
+            )
             
-        }else{
-            Panzoom.resume();
-        }
-        if(isclick && !newLineMode && !isNodeMoveMode && touchPos.x){
-            isConnectorActive = true;
+        ){
+            node.connectorRadius = 10;
+            node.connectorColor = 'yellow';
             Panzoom.pause();
-            connectLine(node);
-            
-        }else{
-            Panzoom.resume();
-
-        }
-
-        
+            if(isclick && !newLineMode && !isNodeMoveMode && !touchPos.x){
+                isConnectorActive = true;
+                Panzoom.pause();
+                connectLine(node);
+            }else{
+                Panzoom.resume();
+            }
+            if(isclick && !newLineMode && !isNodeMoveMode && touchPos.x){
+                isConnectorActive = true;
+                Panzoom.pause();
+                connectLine(node);
+            }else{
+                Panzoom.resume();
+            }
         currentNode = null;
-
         node.draw();
-    }
-    else {
-        Panzoom.resume();
-        node.connectorRadius = 8;
-        node.connectorColor = 'red';        
-        node.draw();            
-    }
-    
-    //conditional for checking if mouse is  inside a node
+        }
+        else{
+            Panzoom.resume();
+            node.connectorRadius = 8;
+            node.connectorColor = 'red';        
+            node.draw();            
+        }
+        
+        //conditional for checking if mouse is  inside a node
         if(          
             (
                 (touchPos.x < (node.x + node.radius - node.connectorRadius))
@@ -413,18 +397,16 @@ function update(){
                 && (mousePos.y > (node.y - node.radius))
                 
             )
-        
-        ){
+        ){  
+            if(!isNodeMoveMode){
+                currentNode = node;
+                touchPosOffset.x = touchPos.x-node.x;
+                touchPosOffset.y = touchPos.y-node.y;
+                mousePosOffset.x = mousePos.x-node.x;
+                mousePosOffset.y = mousePos.y-node.y;
+            }
             
-            currentNode = node;
-            touchPosOffset.x = touchPos.x-node.x;
-            touchPosOffset.y = touchPos.y-node.y;
-            mousePosOffset.x = (mousePos.x-node.x);
-            mousePosOffset.y = (mousePos.y-node.y);
-             
-            if(touchPos.x && newLineMode){
-                // if(isclick){
-                    
+            if(touchPos.x && newLineMode){                    
                     nodeToConnect = node;
                     if( lines.some(line => line.fromNode == currentLine.fromNode && line.toNode == nodeToConnect) ){
                         lines.splice(currentLine.id, 1);
@@ -443,7 +425,6 @@ function update(){
                     nodeToConnect = null;
                     newLineMode = null;
                     }
-                // }
             }
             
             if(newLineMode && mousePos.x){
@@ -508,10 +489,9 @@ function update(){
                     
                 }
             })
-            
         }
 
-        
+            
 
     });
 
@@ -568,15 +548,11 @@ canvas.addEventListener('touchmove', e =>{
         Panzoom.pause();
         currentNode.strokecolor = 'green';
         isNodeMoveMode = true;
-        
         currentNode.x= touchPos.x - touchPosOffset.x;
         currentNode.y= touchPos.y - touchPosOffset.y;
-        currentNode.draw();
-        
-        
+        currentNode.draw();       
     }else{
         Panzoom.resume();
-        
         currentNode = null;
         isNodeMoveMode = false;
     }
@@ -623,20 +599,16 @@ var mystat = document.getElementById("my");
 var isNodeMoveMode = false;
 canvas.addEventListener('mousemove', evt =>{    
     mousePos = getMousePos(canvas, evt);
-    
     if(isclick && currentNode && !isConnectorActive && !newLineMode && !touchPos.x){
-        
         Panzoom.pause();
         isNodeMoveMode = true;        
         currentNode.x= mousePos.x - mousePosOffset.x;
         currentNode.y= mousePos.y - mousePosOffset.y;
         currentNode.draw(); 
-        
     }else{
         Panzoom.resume();  
         currentNode = null;
         isNodeMoveMode = false;
-
     }
 
 
