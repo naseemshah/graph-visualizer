@@ -54,7 +54,6 @@ function updateAdjMatrixLines(){
             updateLinesTree();
         }
     });
-    console.log("AdjMat ",AdjMatrix);
     if(AdjMatrix.length == 0){
         AdjMatrixContainer.innerHTML= "<p>No Matrix to show. Please Add Nodes to calculate matrix. </p>"
         AdjMatPanzoom.pause();        
@@ -98,7 +97,6 @@ function updateIncdMatrixLines(){
             incdMatCells[line.toNode.id-1][line.id-1].innerText = -1; 
         }
     });
-    // console.log("AdjMat ",AdjMatrix);
     if(lines.length == 0){
         incdMatrixContainer.innerHTML= "<p>No Matrix to show. Please connect some nodes to calculate matrix. </p>"
         incdMatPanzoom.pause();        

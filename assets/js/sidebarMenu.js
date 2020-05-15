@@ -33,8 +33,6 @@ upContainer.addEventListener('click',()=>{
 },false);
 
 sidebar.oncontextmenu = function() {
-    console.log("insie sidebar");
-    
     return false;
     }
 function closeSidebar(){
@@ -105,7 +103,6 @@ let toggler2 = document.getElementsByClassName("treeCaret");
     for (let i = 0; i < toggler2.length; i++) {
         
         toggler2[i].addEventListener("click", function() {
-        console.log(this.parentElement.querySelector(".nestedTree"));
         this.parentElement.querySelector(".nestedTree").classList.toggle("activeTree");
         this.classList.toggle("treeCare-down");
         });
@@ -253,7 +250,6 @@ function updateNodesTree(){
     for (let i = 0; i < renameNodeFromTree.length; i++) {
         renameNodeFromTree[i].addEventListener("click", function() {
         this.parentElement.querySelector(".nestedTree").classList.toggle("activeTree");
-        // this.classList.toggle("caret-down");
         });
     }
 

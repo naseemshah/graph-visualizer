@@ -70,9 +70,6 @@ document.addEventListener('touchmove', function(e) {
         // Cache the client X/Y coordinates
         contextMenuPos.x = e.touches[0].clientX;
         contextMenuPos.y = e.touches[0].clientY;
-        // delta.x = e.changedTouches[0].pageX -  TouchStart.x;
-        // delta.y = e.changedTouches[0].pageY -  TouchStart.y;
-        // console.log(delta);
 
 
     }, false);

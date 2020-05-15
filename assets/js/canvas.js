@@ -361,7 +361,6 @@ function update(){
         )
         
     ){
-        console.log("Inside Node "+ (idx+1) + " Connector");            
         
         node.connectorRadius = 10;
         node.connectorColor = 'yellow';
@@ -378,12 +377,10 @@ function update(){
         if(isclick && !newLineMode && !isNodeMoveMode && touchPos.x){
             isConnectorActive = true;
             Panzoom.pause();
-            console.log("PanZoom Paused");
             connectLine(node);
             
         }else{
             Panzoom.resume();
-            console.log("PanZoom resumed");
 
         }
 
@@ -419,7 +416,6 @@ function update(){
         
         ){
             
-            console.log("Inside Node "+ (idx+1));            
             currentNode = node;
             touchPosOffset.x = touchPos.x-node.x;
             touchPosOffset.y = touchPos.y-node.y;
@@ -485,9 +481,7 @@ function update(){
                     options : [
                         {   title:'Delete',
                             action: `deleteNodebyID(${id})`
-                            // action: function(){
-                            //     return console.log("clicked!");
-                            // }
+                            
                         },
                         {
                             title: 'Edit',
@@ -545,7 +539,6 @@ var Tystat = document.getElementById("ty");
 var TouchStart= {x:null, y:null};
 canvas.addEventListener('touchstart', e =>{
     isclick = true;
-    console.log("isclick: " + isclick);
     clientX = e.touches[0].clientX;
     clientY = e.touches[0].clientY;
     var rect = canvas.getBoundingClientRect();
@@ -556,21 +549,12 @@ canvas.addEventListener('touchstart', e =>{
     TouchStart.x = clientX;
     TouchStart.y = clientY;
     
-    
-
-    // Txstat.innerHTML =  Math.floor(touchPos.x);
-    // Tystat.innerHTML =  Math.floor(touchPos.y);
-    
     update();
     }, false);
 
 var delta = {x: 0, y: 0};
 
 canvas.addEventListener('touchmove', e =>{    
-    console.log("delta:", delta) 
-    
-    console.log( e);
-    
     clientX = e.touches[0].clientX;
     clientY = e.touches[0].clientY;
     var rect = canvas.getBoundingClientRect();
@@ -587,10 +571,6 @@ canvas.addEventListener('touchmove', e =>{
         
         currentNode.x= touchPos.x - touchPosOffset.x;
         currentNode.y= touchPos.y - touchPosOffset.y;
-        
-        
-       
-        console.log("CUrrent node x: ",currentNode.x," Y: ",currentNode.y);        
         currentNode.draw();
         
         
@@ -601,9 +581,6 @@ canvas.addEventListener('touchmove', e =>{
         isNodeMoveMode = false;
     }
     
-    
-    // Txstat.innerHTML =  Math.floor(touchPos.x);
-    // Tystat.innerHTML =  Math.floor(touchPos.y);
     update();
     
     }, false);
@@ -624,8 +601,6 @@ canvas.addEventListener('touchend', e =>{
     }
 
     Panzoom.resume();
-    console.log("isclick: " + isclick);
-    console.log(currentNode)
     update();
     }, false);
     
@@ -648,7 +623,6 @@ var mystat = document.getElementById("my");
 var isNodeMoveMode = false;
 canvas.addEventListener('mousemove', evt =>{    
     mousePos = getMousePos(canvas, evt);
-    console.log("New Line mode: ", newLineMode);
     
     if(isclick && currentNode && !isConnectorActive && !newLineMode && !touchPos.x){
         
@@ -669,8 +643,7 @@ canvas.addEventListener('mousemove', evt =>{
     
 
 update();
-// mxstat.innerHTML = Math.floor(mousePos.x);
-// mystat.innerHTML = Math.floor(mousePos.y);
+
 
 }, false);
 
@@ -683,7 +656,6 @@ canvas.addEventListener("mouseup",()=>{
     }
     
     currentNode = null;
-    console.log("isclick: " + isclick);
     
     },false);
 
@@ -692,11 +664,9 @@ canvas.addEventListener("mouseup",()=>{
     canvas.addEventListener("mousedown",()=>{
         isclick = true;
         
-        console.log("isclick: " + isclick);    
     },false);
     
     function connectLine(curNode){
-        console.log("Got Node " + curNode + "\n InitialPos: \n\tx: " + curNode.x + "\n\ty: "+ curNode.y );
         currentLine = newLineFromNode(curNode);
         currentLine.fromNode = curNode;
         
